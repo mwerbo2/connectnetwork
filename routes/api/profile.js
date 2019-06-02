@@ -154,6 +154,10 @@ router.delete("/user", auth, async (req, res) => {
     res.status(500).send("Server Error");
   }
 });
+
+// @route   Put api/profile/experience
+// @desc    Add profile experience
+// @access  Private
 router.put(
   "/experience",
   [
@@ -175,32 +179,54 @@ router.put(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    const { title, company, location, from, to, current, description } = req.body;
+    const {
+      title,
+      company,
+      location,
+      from,
+      to,
+      current,
+      description
+    } = req.body;
 
     const newExp = {
-        title,
-        company,
-        location,
-        from,
-        to,
-        current,
-        description
+      title,
+      company,
+      location,
+      from,
+      to,
+      current,
+      description
     };
     try {
-        const profile = await Profile.findOne({user: req.user.id});
-        profile.experience.unshift(newExp);
-        await profile.save();
-        res.json(profile);
+      const profile = await Profile.findOne({ user: req.user.id });
+      profile.experience.unshift(newExp);
+      await profile.save();
+      res.json(profile);
     } catch (err) {
-        console.error(err)
-        res.status(500).send('Server Error');
+      console.error(err);
+      res.status(500).send("Server Error");
     }
-
   }
 );
 
-// @route   Put api/profile/experience
-// @desc    Add profile experience
+// @route   Delete api/profile/experience/:exp_id
+// @desc    Delete experience from profile
 // @access  Private
+router.delete("/experience/:exp_id", auth, async (req, res) => {
+  try {
+    const profile = await Profile.findOne({ user: req.user.id });
+    // Get remove index from experience array
+    const removeIndex = profile.experience
+      .map(item => item.id)
+      .indexOf(req.params.exp_id);
+    profile.experience.splice(removeIndex, 1);
+    await profile.save();
+    res.json(profile);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: "Server Error" });
+  }
+});
 
 module.exports = router;
