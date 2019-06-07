@@ -15,11 +15,11 @@ const Register = ({ setAlert, register }) => {
 
   const { name, email, password, password2 } = formData;
 
-  const onChange = e =>
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+  const onChange = e => console.log("Register.js 19");
+  setFormData({
+    ...formData,
+    [e.target.name]: e.target.value
+  });
   const onSubmit = async e => {
     e.preventDefault();
     if (password !== password2) {
