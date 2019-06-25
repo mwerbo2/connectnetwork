@@ -70,7 +70,7 @@ export const addExperience = (formData, history) => async dispatch => {
         "Content-Type": "application/json"
       }
     };
-    const res = axios.put("/api/profile/experienc", formData, config);
+    const res = axios.put("/api/profile/experience", formData, config);
 
     dispatch({
       type: UDPATE_PROFILE,
@@ -78,6 +78,39 @@ export const addExperience = (formData, history) => async dispatch => {
     });
 
     dispatch(setAlert("Experience added", "success"));
+    history.push("/dashboard");
+  } catch (err) {
+    const errors = err.response.data.errors;
+    if (errors) {
+      errors.forEach(error => dispatch(setAlert(error.msg, "danger")));
+    }
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: {
+        msg: err.response.statusText,
+        status: err.response.status
+      }
+    });
+  }
+};
+
+// Add education
+
+export const addEducation = (formData, history) => async dispatch => {
+  try {
+    const config = {
+      headers: {
+        "Content-Type": "application/json"
+      }
+    };
+    const res = axios.put("/api/profile/education", formData, config);
+
+    dispatch({
+      type: UDPATE_PROFILE,
+      payload: res.data
+    });
+
+    dispatch(setAlert("Education added", "success"));
     history.push("/dashboard");
   } catch (err) {
     const errors = err.response.data.errors;
