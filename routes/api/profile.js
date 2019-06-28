@@ -6,6 +6,7 @@ const auth = require("../../middleware/auth");
 
 const Profile = require("../../models/Profile");
 const User = require("../../models/User");
+const Post = require("../../models/Post");
 const { check, validationResult } = require("express-validator/check");
 
 // @route   Get api/profile
@@ -302,6 +303,22 @@ router.delete("/education/:edu_id", auth, async (req, res) => {
     profile.education.splice(removeIndex, 1);
     await profile.save();
     res.json(profile);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: "Server Error" });
+  }
+});
+
+router.delete("/", auth, async (req, res) => {
+  try {
+    // Remove user posts
+    await Post.deleteMany({ user: req.user.id });
+    // Remove profile
+    await Profile.findOneAndRemove({ user: req.user.id });
+    // Remove user
+    await User.findOneAndRemove({ _id: req.user.id });
+
+    res.json({ msg: "User deleted" });
   } catch (err) {
     console.error(err);
     res.status(500).json({ msg: "Server Error" });
