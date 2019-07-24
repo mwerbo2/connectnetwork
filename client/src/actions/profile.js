@@ -128,7 +128,6 @@ export const createProfile = (
 };
 
 // Add experience
-
 export const addExperience = (formData, history) => async dispatch => {
   try {
     const config = {
@@ -161,7 +160,6 @@ export const addExperience = (formData, history) => async dispatch => {
 };
 
 // Add education
-
 export const addEducation = (formData, history) => async dispatch => {
   try {
     const config = {
