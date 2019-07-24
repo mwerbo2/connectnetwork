@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect } from "react";
 import { connect } from "react-redux";
-import { getPosts } from "../../actions";
+import { getPosts } from "../../actions/post";
 import PostItem from "./PostItem";
 import Spinner from "../layouts/Spinner";
 

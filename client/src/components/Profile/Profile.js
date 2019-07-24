@@ -69,7 +69,7 @@ const Profile = ({
               )}
             </div>
             {profile.githubusername && (
-              <ProfileGitHub username={profile.githubusername} />
+              <ProfileGithub username={profile.githubusername} />
             )}
           </div>
           profile
