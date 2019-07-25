@@ -5,8 +5,8 @@ import { connect } from "react-redux";
 import Spinner from "../layouts/Spinner";
 import { getPost } from "../../actions/post";
 import PostItem from "../posts/PostItem";
-import CommentForm from "../post/CommentForm";
-import CommentItem from "../post/CommentItem";
+import CommentForm from "./CommentForm";
+import CommentItem from "./CommentItem";
 
 const Post = ({ getPost, post: { post, loading }, match }) => {
   useEffect(() => {
