@@ -14,7 +14,7 @@ import EditProfile from "./components/profile-form/EditProfile";
 import Profiles from "./components/profiles/Profiles";
 import Profile from "./components/Profile/Profile";
 import Posts from "./components/posts/Posts";
-import Post from "./components/post/Post";
+import Post from "./components/Post/Post";
 import "./App.css";
 // Redux
 import { Provider } from "react-redux";
