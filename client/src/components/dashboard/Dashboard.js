@@ -11,10 +11,9 @@ import Education from "./Education";
 const Dashboard = ({
   getCurrentProfile,
   auth: { user },
-  profile: { profile, loading },
-  deleteAccount
+  deleteAccount,
+  profile: { profile, loading }
 }) => {
-  console.log(profile);
   useEffect(() => {
     getCurrentProfile();
   }, [getCurrentProfile]);
