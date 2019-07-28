@@ -27,9 +27,8 @@ if (localStorage.token) {
 }
 
 const App = () => {
-  // Similar to componentDidMount, when added [] as second param
   useEffect(() => {
-    store.dispatch(loadUser);
+    store.dispatch(loadUser());
   }, []);
   return (
     <Provider store={store}>

@@ -22,11 +22,13 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
             </i>
           </p>
           <div className="profiles">
-              {profiles.length > 0 ? (
-                  profiles.map(profile => (
-                      <ProfileItem key={profile._id} profile={profile} />
-                  ))
-              ) : <h4>No profiles found...</h4> }
+            {profiles.length > 0 ? (
+              profiles.map(profile => (
+                <ProfileItem key={profile._id} profile={profile} />
+              ))
+            ) : (
+              <h4>No profiles found...</h4>
+            )}
           </div>
         </Fragment>
       )}
@@ -35,7 +37,7 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
 };
 
 Profiles.propTypes = {
-  getProfile: PropTypes.func.isRequired,
+  getProfiles: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired
 };
 

@@ -37,6 +37,7 @@ export const getProfiles = () => async dispatch => {
   dispatch({ type: CLEAR_PROFILE });
   try {
     const res = await axios.get("/api/profile/");
+    console.log("get pro", res);
     dispatch({
       type: GET_PROFILES,
       payload: res.data
@@ -57,7 +58,7 @@ export const getProfileById = userId => async dispatch => {
   try {
     const res = await axios.get(`/api/profile/user/${userId}`);
     dispatch({
-      type: GET_PROFILES,
+      type: GET_PROFILE,
       payload: res.data
     });
   } catch (err) {
@@ -102,7 +103,8 @@ export const createProfile = (
         "Content-Type": "application/json"
       }
     };
-    const res = axios.post("/api/profile", formData, config);
+    const res = await axios.post("/api/profile", formData, config);
+    console.log("create res", res);
 
     dispatch({
       type: GET_PROFILE,
@@ -136,7 +138,7 @@ export const addExperience = (formData, history) => async dispatch => {
         "Content-Type": "application/json"
       }
     };
-    const res = axios.put("/api/profile/experience", formData, config);
+    const res = await axios.put("/api/profile/experience", formData, config);
 
     dispatch({
       type: UPDATE_PROFILE,
@@ -168,7 +170,7 @@ export const addEducation = (formData, history) => async dispatch => {
         "Content-Type": "application/json"
       }
     };
-    const res = axios.put("/api/profile/education", formData, config);
+    const res = await axios.put("/api/profile/education", formData, config);
 
     dispatch({
       type: UPDATE_PROFILE,
